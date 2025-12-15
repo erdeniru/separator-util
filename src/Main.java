@@ -19,20 +19,6 @@ public class Main {
             System.exit(1); // завершаем программу с ошибкой
         }
 
-        MainParameter param = new MainParameter(args);
-        /* Обработка параметров командной строки */
-
-
-        // DEBUG
-        System.out.println("prefixOutputFile: " + param.prefixOutputFile);
-        System.out.println("outputFolder: " + param.prefixOutputFile);
-        System.out.println("isAppendFile: " + param.isAppendFile);
-        System.out.println("isShortStatistics: " + param.isShortStatistics);
-        System.out.println("isFullStatistics: " + param.isFullStatistics);
-        System.out.println("inputFiles:");
-        for (String file : param.inputFiles) {
-            System.out.println("\t" + file);
-        }
-
+        MainParameter param = new MainParameter(args); // параметры программы
     }
 }

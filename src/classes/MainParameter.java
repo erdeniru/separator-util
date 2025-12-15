@@ -14,8 +14,14 @@ public class MainParameter {
             isAppendFile = false,           // режим добавления в существующий файл
             isShortStatistics = false,      // вывод краткой статистики
             isFullStatistics = false;       // вывод полной статистики
-    public final List<String>
+    public List<String>
             inputFiles = new ArrayList<>(); // массив входных файлов
+
+    /* Имена выходных файлов */
+    static final String
+            integerFile = "integers.txt", // для целых чисел
+            floatFile = "floats.txt",     // для вещественных чисел
+            stringFile = "strings.txt";   // для строковых значений
 
     /**
      * Конструктор создания нового объекта
@@ -56,5 +62,29 @@ public class MainParameter {
                     inputFiles.add(args[i]);
             }
         }
+    }
+
+    /**
+     * Геттер имени выходного файла с целыми числами
+     * @return возвращает путь к файлу
+     */
+    public String getOutputIntegerFile() {
+        return outputFolder + prefixOutputFile + integerFile;
+    }
+
+    /**
+     * Геттер имени выходного файла с вещественными числами
+     * @return возвращает путь к файлу
+     */
+    public String getOutputFloatFile() {
+        return outputFolder + prefixOutputFile + floatFile;
+    }
+
+    /**
+     * Геттер имени выходного файла со строковыми значениями
+     * @return возвращает путь к файлу
+     */
+    public String getOutputStringFile() {
+        return outputFolder + prefixOutputFile + stringFile;
     }
 }
