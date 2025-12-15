@@ -2,8 +2,8 @@
 ## Описание
 Реализация тестового задания для отоборочного этапа в проект ШИФТ.<br>
 Описание задание см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/SHIFT_Java_Test_Task_f8f56f0c1e.pdf)<br>
-Реализовано на Java 21, без системы сборки, без сторонних библиотек
-Моя схема реализации см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/scheme.png)<br>
+Реализовано на Java 21, без системы сборки, без сторонних библиотек<br>
+Моя схема реализации см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/scheme.png)
 
 ## Использование
 1. Скомпилируйте исходный код
