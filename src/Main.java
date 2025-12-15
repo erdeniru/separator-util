@@ -1,4 +1,5 @@
 import classes.MainParameter;
+import classes.Utils;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -42,7 +43,13 @@ public class Main {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     // DEBUG
-                    System.out.println(line);
+                    if (Utils.isInteger(line)) {
+                        System.out.println(line + "\t - целое");
+                    } else if (Utils.isFloat(line)) {
+                        System.out.println(line + "\t - вещественное");
+                    } else {
+                        System.out.println(line + "\t - строковое");
+                    }
                 }
                 System.out.println("\t" + inputFile + " - успешно"); // выводим сообщение об успешном выполнении
             } catch (IOException e) { // если произошла ошибка обработки файла
