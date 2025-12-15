@@ -44,6 +44,12 @@ public class Main {
                 floatWriter = new Writer(param.getOutputFloatFile(), param.isAppendFile),
                 stringWriter = new Writer(param.getOutputStringFile(), param.isAppendFile);
 
+        /* Флаги открытия выходного файла */
+        boolean
+                isOpenInteger = false,
+                isOpenFloat = false,
+                isOpenString = false;
+
         /* Флаги ошибки записи в выходной файл */
         boolean
                 isErrorInteger = false,
@@ -66,8 +72,9 @@ public class Main {
                     if (!isErrorInteger && Utils.isInteger(line)) { // если нет ошибки и значение целое число
                         /* Запись в файл с целочисленными значениями */
                         try {
-                            if (!integerWriter.getIsOpen()) { // если файл не открыт
+                            if (!isOpenInteger) { // если файл не открыт
                                 integerWriter.openFile(); // открываем файл для записи
+                                isOpenInteger = true;
                             }
                             integerWriter.writeFile(line); // пишем в файл
                         } catch (IOException e) {
@@ -76,8 +83,9 @@ public class Main {
                     } else if (!isErrorFloat && Utils.isFloat(line)) { // если нет ошибки и значение вещественное число
                         /* Запись в файл с вещественныеми значениями */
                         try {
-                            if (!floatWriter.getIsOpen()) { // если файл не открыт
+                            if (!isOpenFloat) { // если файл не открыт
                                 floatWriter.openFile(); // открываем файл для записи
+                                isOpenFloat = true;
                             }
                             floatWriter.writeFile(line); // пишем в файл
                         } catch (IOException e) {
@@ -86,8 +94,9 @@ public class Main {
                     } else if (!isErrorString) { // если нет ошибки и значение строковое значение
                         /* Запись в файл со строковыми значениями */
                         try {
-                            if (!stringWriter.getIsOpen()) { // если файл не открыт
+                            if (!isOpenString) { // если файл не открыт
                                 stringWriter.openFile(); // открываем файл для записи
+                                isOpenString = true;
                             }
                             stringWriter.writeFile(line); // пишем в файл
                         } catch (IOException e) {
@@ -101,42 +110,42 @@ public class Main {
             }
         }
 
-        /* Закрываем открытые потоки */
+        /* Закрываем открытые файлы */
         try {
-            if (integerWriter.getIsOpen()) {
+            if (isOpenInteger) { // если файл открыт
                 integerWriter.closeFile(); // закрываем файл
             }
         } catch (IOException e) {
-            isErrorInteger = true;
+            isErrorInteger = false;
         }
         try {
-            if (floatWriter.getIsOpen()) {
+            if (isOpenFloat) { // если файл открыт
                 floatWriter.closeFile(); // закрываем файл
             }
         } catch (IOException e) {
-            isErrorFloat = true;
+            isErrorFloat = false;
         }
         try {
-            if (stringWriter.getIsOpen()) {
+            if (isOpenString) { // если файл открыт
                 stringWriter.closeFile(); // закрываем файл
             }
         } catch (IOException e) {
-            isErrorString = true;
+            isErrorString = false;
         }
 
         /* Выводим результат записи выходных файлов */
         System.out.println("Запись выходных файлов:");
-        if (!isErrorInteger) { // если запись файла прошла успешно
+        if (!isErrorInteger) {
             System.out.println("\t" + integerWriter.getFileName() + " - успешно");
         } else {
             System.out.println("\t" + integerWriter.getFileName() + " - ошибка записи");
         }
-        if (!isErrorFloat) { // если запись файла прошла успешно
+        if (!isErrorFloat) {
             System.out.println("\t" + floatWriter.getFileName() + " - успешно");
         } else {
             System.out.println("\t" + floatWriter.getFileName() + " - ошибка записи");
         }
-        if (!isErrorString) { // если запись файла прошла успешно
+        if (!isErrorString) {
             System.out.println("\t" + stringWriter.getFileName() + " - успешно");
         } else {
             System.out.println("\t" + stringWriter.getFileName() + " - ошибка записи");

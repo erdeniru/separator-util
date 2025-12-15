@@ -14,6 +14,8 @@ public class Writer {
     private final boolean isAppend;  // флаг режима дозаписи
     private boolean isOpen;          // флаг открытого файла
     private BufferedWriter writer;   // поток вывода в файл
+    private boolean isError;
+    private String errorMessage;
 
     /**
      * Конструктор создания нового объекта
@@ -25,22 +27,15 @@ public class Writer {
         /* Инициализация полей класса */
         fileName = filename;
         isAppend = append;
-        isOpen = false;
     }
 
     /**
      * Метод получения значения поля {@link Writer#fileName}
+     *
      * @return возвращает имя файла
      */
-    public String getFileName() { return fileName; }
-
-    /**
-     * Метод получения значения поля {@link Writer#isOpen}
-     *
-     * @return возвращает true - если файл открыт, false - если закрыт
-     */
-    public boolean getIsOpen() {
-        return isOpen;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
@@ -48,7 +43,6 @@ public class Writer {
      */
     public void openFile() throws IOException {
         writer = new BufferedWriter(new FileWriter(fileName, isAppend)); // создаем экзепляр буферезированного потока
-        isOpen = true; // устанавливаем флаг октрытого файла
     }
 
     /**
@@ -67,16 +61,12 @@ public class Writer {
      */
     public void closeFile() throws IOException {
         writer.close(); // закрываем поток
-        isOpen = false; // устанавливаем флаг закрытия файла
     }
 
     public static void main(String[] args) throws IOException {
         Writer writer = new Writer("result\\test.txt", false);
         writer.openFile();
         writer.writeFile("test");
-        writer.writeFile("123");
-        if (writer.isOpen) {
-            writer.closeFile();
-        }
+        writer.closeFile();
     }
 }
