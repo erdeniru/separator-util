@@ -1,5 +1,10 @@
 import classes.MainParameter;
 
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
     /**
      * Программа фильтрации содержимого файлов
@@ -21,10 +26,20 @@ public class Main {
 
         MainParameter param = new MainParameter(args); // параметры программы
 
-        // DEBUG
-        System.out.println(param.getOutputIntegerFile());
-        System.out.println(param.getOutputFloatFile());
-        System.out.println(param.getOutputStringFile());
+        /* Фильтрация содержимого входных файлов */
+        System.out.println("Фильтрация содержимого файлов");
+
+        /* Обрабатываем список входных файлов */
+        for (String inputFile : param.inputFiles) {
+            // Проверяем существует ли входной файл
+            if (!(new File(inputFile)).exists()) { /* если файл не сущестует */
+                System.err.println("\t" + inputFile + " - файл не найден"); // выводим сообщение
+                continue; // и пропускаем обработку файла
+            }
+
+            // DEBUG
+            System.out.println("\t" + inputFile);
+        }
 
     }
 }
