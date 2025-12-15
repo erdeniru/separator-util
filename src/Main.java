@@ -37,8 +37,17 @@ public class Main {
                 continue; // и пропускаем обработку файла
             }
 
-            // DEBUG
-            System.out.println("\t" + inputFile);
+            // Чтение входного файла
+            try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    // DEBUG
+                    System.out.println(line);
+                }
+                System.out.println("\t" + inputFile + " - успешно"); // выводим сообщение об успешном выполнении
+            } catch (IOException e) { // если произошла ошибка обработки файла
+                System.err.println("\t" + inputFile + " - ошибка обработки файла"); // выводим сообщение об ошибке
+            }
         }
 
     }
