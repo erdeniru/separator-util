@@ -49,11 +49,10 @@ public class MainParameter {
                     isFullStatistics = true;
                     break;
                 case "-p":
-                    i++;
-                    prefixOutputFile = args[i];
+                    prefixOutputFile = args[++i]; // следующий параметр - это префикс
                     break;
                 case "-o":
-                    outputFolder = args[i++]; // следующий параметр - это имя папки
+                    outputFolder = args[++i]; // следующий параметр - это имя папки
                     if (!outputFolder.endsWith("\\")) { // если имя папки не заканчивается слэшем
                         outputFolder = outputFolder + "\\"; // добавляем слэш
                     }

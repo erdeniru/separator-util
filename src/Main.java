@@ -20,5 +20,11 @@ public class Main {
         }
 
         MainParameter param = new MainParameter(args); // параметры программы
+
+        // DEBUG
+        System.out.println(param.getOutputIntegerFile());
+        System.out.println(param.getOutputFloatFile());
+        System.out.println(param.getOutputStringFile());
+
     }
 }
