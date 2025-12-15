@@ -1,7 +1,7 @@
 package classes;
 
 public class Utils {
-    static boolean isInteger(String str) {
+    public static boolean isInteger(String str) {
 //        return str.matches("[-+]?\\d+");
         try {
             Long.parseLong(str);
@@ -11,7 +11,7 @@ public class Utils {
         }
     }
 
-    static boolean isFloat(String str) {
+    public static boolean isFloat(String str) {
 //        return str.matches("[-+]?\\d+\\.?\\d+(E-)?\\d+");
         try {
             Double.parseDouble(str);
