@@ -1,11 +1,14 @@
-import classes.MainParameter;
-import classes.Utils;
-import classes.Writer;
-
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import classes.MainParameter;
+import classes.Utils;
+import classes.Writer;
+import classes.StatWriter;
 
 public class Main {
     /**
@@ -40,9 +43,19 @@ public class Main {
 
         /* Создание потоков для записи в выходной файл */
         Writer
-                integerWriter = new Writer(param.getOutputIntegerFile(), param.isAppendFile),
-                floatWriter = new Writer(param.getOutputFloatFile(), param.isAppendFile),
-                stringWriter = new Writer(param.getOutputStringFile(), param.isAppendFile);
+                integerWriter,
+                floatWriter,
+                stringWriter;
+
+        if (param.isShortStatistics) {
+            integerWriter = new StatWriter(param.getOutputIntegerFile(), param.isAppendFile);
+            floatWriter = new StatWriter(param.getOutputFloatFile(), param.isAppendFile);
+            stringWriter = new StatWriter(param.getOutputStringFile(), param.isAppendFile);
+        } else {
+            integerWriter = new Writer(param.getOutputIntegerFile(), param.isAppendFile);
+            floatWriter = new Writer(param.getOutputFloatFile(), param.isAppendFile);
+            stringWriter = new Writer(param.getOutputStringFile(), param.isAppendFile);
+        }
 
         /* Флаги открытия выходного файла */
         boolean
@@ -134,21 +147,34 @@ public class Main {
         }
 
         /* Выводим результат записи выходных файлов */
+
+        List<Writer> writerList = new ArrayList<>(); // создаем список потоков для удобства
+
         System.out.println("Запись выходных файлов:");
         if (!isErrorInteger) {
             System.out.println("\t" + integerWriter.getFileName() + " - успешно");
+            writerList.add(integerWriter);
         } else {
             System.out.println("\t" + integerWriter.getFileName() + " - ошибка записи");
         }
         if (!isErrorFloat) {
             System.out.println("\t" + floatWriter.getFileName() + " - успешно");
+            writerList.add(floatWriter);
         } else {
             System.out.println("\t" + floatWriter.getFileName() + " - ошибка записи");
         }
         if (!isErrorString) {
             System.out.println("\t" + stringWriter.getFileName() + " - успешно");
+            writerList.add(stringWriter);
         } else {
             System.out.println("\t" + stringWriter.getFileName() + " - ошибка записи");
+        }
+
+        /* Выводим статистику */
+        for (Writer writer : writerList) {
+            if (writer instanceof StatWriter) { // если объект является экзепляром класса со статистикой
+                ((StatWriter) writer).printStatistics(); // выводим статистику
+            }
         }
     }
 }
