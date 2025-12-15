@@ -7,4 +7,5 @@ out/
 *.iws
 
 ## java
+bin/
 *.class
