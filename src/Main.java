@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.MainParameter;
-import classes.Utils;
-import classes.Writer;
-import classes.StatWriter;
+import classes.*;
 
 public class Main {
     /**
@@ -47,7 +44,11 @@ public class Main {
                 floatWriter,
                 stringWriter;
 
-        if (param.isShortStatistics) {
+        if (param.isFullStatistics) {
+            integerWriter = new IntegerStatWriter(param.getOutputIntegerFile(), param.isAppendFile);
+            floatWriter = new FloatStatWriter(param.getOutputFloatFile(), param.isAppendFile);
+            stringWriter = new StringStatWriter(param.getOutputStringFile(), param.isAppendFile);
+        } else if (param.isShortStatistics) {
             integerWriter = new StatWriter(param.getOutputIntegerFile(), param.isAppendFile);
             floatWriter = new StatWriter(param.getOutputFloatFile(), param.isAppendFile);
             stringWriter = new StatWriter(param.getOutputStringFile(), param.isAppendFile);
