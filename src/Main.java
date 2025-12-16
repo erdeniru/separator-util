@@ -70,19 +70,19 @@ public class Main {
                     /* Фильтрация содержимого */
                     if (Utils.isInteger(line) && !integerWriter.getIsError()) { // если целое число и нет ошибки записи
                         if (!integerWriter.getIsOpen()) // если файл не открыт
-                            integerWriter.openFile(); // то открываем
+                            integerWriter.openFile(); // то открываем поток для записи целочисленных значений
                         if (!integerWriter.getIsError())
-                            integerWriter.writeFile(line); // поток записи целочисленных значений
+                            integerWriter.writeFile(line); // пишем в файл
                     } else if (Utils.isFloat(line) && !floatWriter.getIsError()) { // если вещественное и нет ошибки
                         if (!floatWriter.getIsOpen()) // если файл не открыт
-                            floatWriter.openFile(); // то открываем
+                            floatWriter.openFile(); // то открываем поток для записи вещественных значений
                         if (!floatWriter.getIsError())
-                            floatWriter.writeFile(line); // поток записи вещественных значений
+                            floatWriter.writeFile(line); // пишем в файл
                     } else if (!stringWriter.getIsError()) { // если строковое и нет ошибки
                         if (!stringWriter.getIsOpen())  // если файл не открыт
-                            stringWriter.openFile(); // то открываем
+                            stringWriter.openFile(); // то открываем поток для записи строковых значений
                         if (!stringWriter.getIsError())
-                            stringWriter.writeFile(line); // поток записи строковых значений
+                            stringWriter.writeFile(line); // пишем в файл
                     }
                 }
                 System.out.println("\t" + inputFile + " - успешно"); // выводим сообщение об успешном выполнении
