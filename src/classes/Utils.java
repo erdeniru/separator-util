@@ -1,6 +1,11 @@
 package classes;
 
 public class Utils {
+    /**
+     * Фукнция проверки является ли строка целым числом
+     * @param str строковое значение
+     * @return возвращает true если значение целое число, false - не является целым числом
+     */
     public static boolean isInteger(String str) {
 //        return str.matches("[-+]?\\d+");
         try {
@@ -11,7 +16,11 @@ public class Utils {
         }
     }
 
-    public static boolean isFloat(String str) {
+    /**
+     * Фукнция проверки является ли строка вещественным числом
+     * @param str строковое значение
+     * @return возвращает true если значение вещественное число, false - не является вещественным числом
+     */    public static boolean isFloat(String str) {
 //        return str.matches("[-+]?\\d+\\.?\\d+(E-)?\\d+");
         try {
             Double.parseDouble(str);

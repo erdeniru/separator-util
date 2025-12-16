@@ -1,16 +1,18 @@
 package classes;
+
 import java.io.IOException;
 
 /**
  * Класс для записи значения в текстовый файл со сбором краткой статистики
  */
-public class StatWriter extends Writer { // наследуем от класса Writer
+public class StatWriter extends MainWriter { // наследуем от класса MainWriter
     protected long countValues; // количество записей значений
 
     /**
      * Конструктор создания нового объекта
+     *
      * @param filename - имя файла
-     * @param append - режим дозаписи
+     * @param append   - режим дозаписи
      */
     public StatWriter(String filename, boolean append) {
         super(filename, append); // вызываем конструктор базового класса
@@ -21,6 +23,7 @@ public class StatWriter extends Writer { // наследуем от класса
 
     /**
      * Метод записи значения в файл со сбором статистики
+     *
      * @param str значение для записи в файл
      */
     @Override // переопределяем метод базового класса
@@ -32,6 +35,7 @@ public class StatWriter extends Writer { // наследуем от класса
 
     /**
      * Метод сбора краткой статистики
+     *
      * @param str значение для сбора статистики
      */
     public void calculateStatistics(String str) {
