@@ -1,8 +1,6 @@
 ﻿Lorem ipsum dolor sit amet
 Пример
 consectetur adipiscing
--0.001
 тестовое задание
 ﻿Нормальная форма числа с плавающей запятой
-1.528535047E-25
 Long

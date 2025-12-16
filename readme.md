@@ -2,19 +2,24 @@
 ## Описание
 Реализация тестового задания для отоборочного этапа в проект ШИФТ.<br>
 Описание задание см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/SHIFT_Java_Test_Task_f8f56f0c1e.pdf)<br>
+<br>
 Реализовано на Java 21, без системы сборки, без сторонних библиотек<br>
-Моя схема реализации см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/scheme.png)
+Моя схема см. по [ссылке](https://github.com/erdeniru/separator-util/blob/main/doc/scheme.png)
+
 
 ## Использование
 1. Скомпилируйте исходный код
 ```
 javac -sourcepath src -d bin .\src\Main.java
 ```
+или запустите пакетный файл ```make.util.bat```
+
 2. Запустите приложение
 ```
 java -cp bin Main -s -a -f -p "result_" in1.txt in2.txt in3.txt -o "result"
 ```
-Параметры командной строки:
+или запустите пакетный файл ```run.util.bat```
+### Параметры командной строки
 - -p - префикс имен выходных файлов
 - -o - "папка" путь к папке выходных файлов
 - -a - режим добавления в существующий файл
@@ -26,3 +31,15 @@ java -cp bin Main -s -a -f -p "result_" in1.txt in2.txt in3.txt -o "result"
 - result - папка с выходными файлами
 - src - исходный код приложения
 - in1.txt и in2.txt - входные файлы приложения
+
+### Структура классов
+- Main - Главная программа
+- MainParameter - Параметры главной программы
+- Utils - Вспомогательные функции 
+- MainWriter - Класс, который записывает значение в текстовый файл
+  - StatWriter - Дочерный класс MainWriter, который при записи значения в текстовый файл собирает статистику
+    - NumericStatWriter - Абстрактный дочерный класс StatWriter является общим для записи числовых значений
+      - IntegerStatWriter - Дочерный класс NumericStatWriter, который при записи в текстовый файл собирает статистик по целочисленным значениям
+      - FloatStatWriter - Дочерный класс NumericStatWriter, который при записи в текстовый файл собирает статистик по вещественным значениям
+    - StringStatWriter - Дочерний класс StatWriter, который при записи в файл собирает статистик по строковым значениям
+  
