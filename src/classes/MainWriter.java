@@ -39,18 +39,24 @@ public class MainWriter {
     public boolean getIsError() { return isError; }
 
     /**
+     * Метод открытия файла для буферизированного потока записи
+     */
+    public void openFile() {
+        try {
+            writer = new BufferedWriter(new FileWriter(fileName, isAppend)); // создаем экзепляр буферезированного потока
+            isOpen = true;
+        } catch (IOException e) {
+            isError = true;
+        }
+    }
+
+    /**
      * Метод записи значения в файл.
      * Если файл не открыт для записи, то открываем файл
      * @param str значение
      */
-    public void writeFile(String str) throws IOException {
-        // FIX - две действия (открытие файла и запись файла) в одном методе
+    public void writeFile(String str) {
         try {
-            if (!isOpen) {
-                /* Открываем файл текстовй файл для записи */
-                writer = new BufferedWriter(new FileWriter(fileName, isAppend)); // создаем экзепляр буферезированного потока
-                isOpen = true;
-            }
             /* Записивываем значение в буферизированный поток */
             writer.write(str);
             writer.newLine();
@@ -71,7 +77,7 @@ public class MainWriter {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         MainWriter writer = new MainWriter("result\\test.txt", false);
         writer.writeFile("test");
         writer.closeFile();

@@ -27,7 +27,7 @@ public class StatWriter extends MainWriter { // наследуем от клас
      * @param str значение для записи в файл
      */
     @Override // переопределяем метод базового класса
-    public void writeFile(String str) throws IOException {
+    public void writeFile(String str) {
         super.writeFile(str); // вызываем метод базавого класса
 
         calculateStatistics(str); // вызываем метод сбора статистики

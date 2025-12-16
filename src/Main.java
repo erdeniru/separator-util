@@ -39,11 +39,7 @@ public class Main {
         System.out.println("Фильтрация содержимого файлов");
 
         /* Создание потоков для записи в выходной файл */
-        MainWriter
-                integerWriter,
-                floatWriter,
-                stringWriter;
-
+        MainWriter integerWriter, floatWriter, stringWriter;
         if (param.isFullStatistics) { // если выбрана опция полной статистики
             integerWriter = new IntegerStatWriter(param.getOutputIntegerFile(), param.isAppendFile);
             floatWriter = new FloatStatWriter(param.getOutputFloatFile(), param.isAppendFile);
@@ -71,12 +67,22 @@ public class Main {
             try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
                 String line;
                 while ((line = reader.readLine()) != null) { // читаем строку пока значение не пустое значение
+                    /* Фильтрация содержимого */
                     if (Utils.isInteger(line) && !integerWriter.getIsError()) { // если целое число и нет ошибки записи
-                        integerWriter.writeFile(line); // поток записи целочисленных значений
+                        if (!integerWriter.getIsOpen()) // если файл не открыт
+                            integerWriter.openFile(); // то открываем
+                        if (!integerWriter.getIsError())
+                            integerWriter.writeFile(line); // поток записи целочисленных значений
                     } else if (Utils.isFloat(line) && !floatWriter.getIsError()) { // если вещественное и нет ошибки
-                        floatWriter.writeFile(line); // поток записи вещественных значений
+                        if (!floatWriter.getIsOpen()) // если файл не открыт
+                            floatWriter.openFile(); // то открываем
+                        if (!floatWriter.getIsError())
+                            floatWriter.writeFile(line); // поток записи вещественных значений
                     } else if (!stringWriter.getIsError()) { // если строковое и нет ошибки
-                        stringWriter.writeFile(line); // поток записи строковых значений
+                        if (!stringWriter.getIsOpen())  // если файл не открыт
+                            stringWriter.openFile(); // то открываем
+                        if (!stringWriter.getIsError())
+                            stringWriter.writeFile(line); // поток записи строковых значений
                     }
                 }
                 System.out.println("\t" + inputFile + " - успешно"); // выводим сообщение об успешном выполнении
